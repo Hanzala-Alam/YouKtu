@@ -1,1 +1,40 @@
-<p>preview works!</p>
+<app-navbar></app-navbar>
+<app-drawer></app-drawer>
+<div [ngStyle]="{'display':'flex','flex-wrap':'wrap','margin-left':_themes.isLeftNavOpen ? '70px' : '260px','margin-top':'60px'}">
+    
+    <div class="movie-details">
+        <div class="header">
+            <img src="https://placekitten.com/300/180" alt="Movie Poster">
+            <div class="title">Title</div>
+        </div>
+        <div class="main-content">
+            <div class="description">
+                <h2>Description</h2>
+                <p>asdasjhdjashdjhasjhdahsdh Description</p>
+            </div>
+        <div class="additional-info">
+            <div class="release-date">
+                <strong>Release Date:</strong> 1/22/2024
+            </div>
+            <div class="genre">
+                <strong>Genre:</strong> "dddddddddddddddddddddd Genre"
+            </div>
+        </div>
+    </div>
+
+    <div [ngStyle]="{'border':'solid 1px red','width':'200px'}">
+        <div>
+            <button>
+                <i class="fa fa-play"></i>
+            </button>
+        </div>
+    </div>
+    <!-- <div class="related-movies">
+        <h2>Related Movies</h2>
+        <div class="related-movie" *ngFor="let relatedMovie of movie.relatedMovies">
+            <img src="{{ relatedMovie.poster }}" alt="{{ relatedMovie.title }}" />
+            <div class="title">{{ relatedMovie.title }}</div>
+        </div>
+    </div> -->
+    </div>
+</div>
