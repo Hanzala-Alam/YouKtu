@@ -12,12 +12,8 @@ export class DrawerComponent {
   constructor(private themes:ThemesService){
     this._themes = themes;
   }
-  
-  isLeftNavOpen = false;
+
   toggleLeftNav() {
-    this.isLeftNavOpen = !this.isLeftNavOpen;
-    this.themes.isLeftNavOpen = this.isLeftNavOpen;
-    const leftNav = document.querySelector('.left-nav');
-    leftNav?.classList.toggle('closed');
+    this._themes.toggleLeftNav();
   }
 }
