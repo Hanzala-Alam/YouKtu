@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DrawerComponent } from './drawer/drawer.component';
 import { HomeComponent } from './home/home.component';
 import { MovieCardComponent } from './cards/movie-card/movie-card.component';
+import { PreviewComponent } from './preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MovieCardComponent } from './cards/movie-card/movie-card.component';
     NavbarComponent,
     DrawerComponent,
     HomeComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
