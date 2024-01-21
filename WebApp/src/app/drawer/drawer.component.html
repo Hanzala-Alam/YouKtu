@@ -1,0 +1,30 @@
+<div class="left-nav {{_themes.themes == false ? 'themes-light' : 'themes-dark'}}">
+    <div style="width:70px;display: grid">
+        <button class="{{_themes.themes == true ? 'btn btn-dark' : 'btn btn-light'}}" (click)="toggleLeftNav()">
+            <i class="fas fa-bars" [ngStyle]="{'font-size': '18px'}"></i>
+        </button>
+    </div>
+  <div class="nav-item">
+    <div style="display: inline-flex;">
+        <div [ngStyle]="{'width':'50px','display':'inline-grid'}">
+            <i class="fa fa-home" [ngStyle]="{'font-size': '18px','color':_themes.color,'margin':'auto'}"></i>
+            <span [ngStyle]="{'color':_themes.color,'text-align':'center','display':isLeftNavOpen ? 'block' : 'none','font-size':'12px'}">Home</span>
+        </div>
+        <div [ngStyle]="{'margin-left':'20px'}">
+            <a href="#" [ngStyle]="{'font-size': '18px','color':_themes.color,'font-weight':'bold'}">Home</a>
+        </div>
+    </div>
+  </div>
+  <div class="nav-item">
+    <div style="display: inline-flex;">
+        <div [ngStyle]="{'width':'50px','display':'inline-grid'}">
+            <i class="fa fa-cog" [ngStyle]="{'font-size': '18px','color':_themes.color,'margin':'auto'}"></i>
+            <span [ngStyle]="{'color':_themes.color,'text-align':'center','display':isLeftNavOpen ? 'block' : 'none','font-size':'12px'}">Settings</span>
+        </div>
+        <div [ngStyle]="{'margin-left':'20px'}">
+            <a href="#" [ngStyle]="{'font-size': '18px','color':_themes.color,'font-weight':'bold'}">Settings</a>
+        </div>
+    </div>
+  </div>
+  <!-- Add more items as needed -->
+</div>

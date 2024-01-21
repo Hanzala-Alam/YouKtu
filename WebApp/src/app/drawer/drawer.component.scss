@@ -1,0 +1,47 @@
+.left-nav {
+  width: 250px;
+  height: 100%;
+  padding-top: 0px; /* Adjust based on your header height */
+  background-color: #212529;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 56px;
+}
+
+.themes-light{
+  background-color: #f8f9fa;
+}
+
+.themes-dark{
+  background-color: #212529;
+}
+  
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-item:hover {
+  background-color: #0f0e0e0b;
+}
+
+.nav-item i {
+  margin-right: 10px;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: #fff;
+}
+
+
+.left-nav.open {
+  width: 250px;
+}
+.left-nav.closed {
+  width: 70px;
+}
