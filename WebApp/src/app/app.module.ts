@@ -8,6 +8,7 @@ import { DrawerComponent } from './drawer/drawer.component';
 import { HomeComponent } from './home/home.component';
 import { MovieCardComponent } from './cards/movie-card/movie-card.component';
 import { PreviewComponent } from './preview/preview.component';
+import { MediaPlayerComponent } from './media-player/media-player.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PreviewComponent } from './preview/preview.component';
     DrawerComponent,
     HomeComponent,
     MovieCardComponent,
-    PreviewComponent
+    PreviewComponent,
+    MediaPlayerComponent
   ],
   imports: [
     BrowserModule,

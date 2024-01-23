@@ -61,3 +61,48 @@
     width: 100%;
   }
 }
+
+.poster-body{
+  width: 550px;
+  margin: 5px;
+  position: relative;
+}
+
+.play-body{
+  background-color: rgba(0, 0, 0, 0.755);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.play-button-body{
+  border: solid 2px wheat;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.584);
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.poster-body:hover .play-body{
+  visibility: visible;
+  opacity: 1;
+}
+
+.poster-body:hover .play-button-body{
+  visibility: visible;
+  opacity: 1;
+}

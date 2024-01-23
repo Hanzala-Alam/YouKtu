@@ -1,61 +1,44 @@
 <app-navbar></app-navbar>
+
 <app-drawer></app-drawer>
-
-<!-- <div [ngStyle]="{'display':'inline-flex','flex-wrap':'wrap','margin-left':_themes.isLeftNavOpen ? '70px' : '260px','margin-top':'60px','width':'100%','border':'solid 5px red'}"> -->
-    <!-- <div class="movie-details"> -->
-        <!-- <div class="header"> -->
-            <!-- <img src="https://m.media-amazon.com/images/M/MV5BNGZlNTFlOWMtMzUwNC00ZDdhLTk0MWUtOGZjYzFlOTBmNDdhXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg" alt="Movie Poster"> -->
-        <!-- </div> -->
-        <!-- <div class="main-content"> -->
-            
-        <!-- <div class="additional-info">
-            <div class="date">
-                <strong>Release Date:</strong> 1/22/2024
-            </div>
-            <div class="genre">
-                <strong>Posted Date:</strong> 1/22/2024
-            </div>
-        </div> -->
-    <!-- </div> -->
-
-    <!-- <div [ngStyle]="{'width':'200px',}">
-        <div>
-            <button class="btn btn-outline-info">
-                <i class="fa fa-play" [ngStyle]="{'color':'black'}"></i>
-                <span [ngStyle]="{'color':'black'}"><strong>&emsp;Watch Trailer</strong></span>
-            </button>
-        </div>
-    </div> -->
-    <!-- <div class="related-movies">
-        <h2>Related Movies</h2>
-        <div class="related-movie" *ngFor="let relatedMovie of movie.relatedMovies">
-            <img src="{{ relatedMovie.poster }}" alt="{{ relatedMovie.title }}" />
-            <div class="title">{{ relatedMovie.title }}</div>
-        </div>
-    </div> -->
-<!-- </div> -->
 
 <div [ngStyle]="{'margin-left':_themes.isLeftNavOpen ? '80px' : '260px','display':'flex','margin-top':'60px','border-bottom':'2px black solid','padding':'10px','padding-left':'0px'}">
     <strong style="font-size: 20px;"><span>Pushpa - Chapter 2 (Rules)</span></strong>
 </div>
 <div [ngStyle]="{'margin-left':_themes.isLeftNavOpen ? '75px' : '260px','display':'flex','margin-top':'10px'}">
-    <div style="width: 550px;padding: 5px;">
+    <div class="poster-body">
+        <div class="play-body">
+            <div class="play-button-body">
+                <i class="fa fa-play" style="font-size: 40px;color: wheat;"></i>
+            </div>
+        </div>
         <img src="https://m.media-amazon.com/images/M/MV5BNGZlNTFlOWMtMzUwNC00ZDdhLTk0MWUtOGZjYzFlOTBmNDdhXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg" style="width: 100%">
     </div>
-    <div style="width: 400px;padding: 10px;">
-        <table>
-            <thead>
-                <tr>
-                    <th style="font-size: 13px;">Releas Date</th>
-                    <th style="font-size: 13px;">:</th>
-                    <th style="font-size: 13px;">01/23/2024</th>
-                </tr>
-                <tr>
-                    <th style="font-size: 13px;">Posted Date</th>
-                    <th style="font-size: 13px;">:</th>
-                    <th style="font-size: 13px;">01/23/2024</th>
-                </tr>
-            </thead>
-        </table>
+    <div style="width: 100%;padding: 5px;">
+        <div style="width: 100%;background-color: rgba(79, 206, 126, 0.852);">
+            <table style="color: rgb(25, 17, 17);">
+                <thead>
+                    <tr>
+                        <th style="font-size: 13px;">Releas Date</th>
+                        <th style="font-size: 13px;">:</th>
+                        <th style="font-size: 13px;">01/23/2024</th>
+                    </tr>
+                    <tr>
+                        <th style="font-size: 13px;">Posted Date</th>
+                        <th style="font-size: 13px;">:</th>
+                        <th style="font-size: 13px;">01/23/2024</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div style="padding-top: 20px;">
+            <button class="btn btn-outline-success">
+                <i class="fa fa-play" [ngStyle]="{'color':'black'}"></i>
+                <span [ngStyle]="{'color':'black'}"><strong>&emsp;Watch Trailer</strong></span>
+            </button>
+        </div>
     </div>
 </div>
+
+<app-movie-card [ngStyle]="{'display':'inline-flex','flex-wrap':'wrap','margin-left':_themes.isLeftNavOpen ? '70px' : '260px','margin-top':'60px'}"></app-movie-card>
