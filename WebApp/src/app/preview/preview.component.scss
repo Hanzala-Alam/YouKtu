@@ -1,7 +1,7 @@
 .movie-details {
-  max-width: 800px;
+  width: 350px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .header {
@@ -10,17 +10,8 @@
 
 .header img {
   width: 100%;
-  max-height: 400px;
+  height: 450px;
   object-fit: cover;
-}
-
-.title {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  font-size: 24px;
-  color: #fff;
-  font-weight: bold;
 }
 
 .main-content {
@@ -37,9 +28,8 @@
   justify-content: space-between;
 }
 
-.release-date,
-.genre {
-  width: 48%; /* Adjust as needed based on your design */
+.date {
+  width: 30%; /* Adjust as needed based on your design */
   margin-bottom: 10px;
 }
 
@@ -67,8 +57,7 @@
     flex-direction: column;
   }
 
-  .release-date,
-  .genre {
+  .date {
     width: 100%;
   }
 }
