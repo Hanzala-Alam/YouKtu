@@ -1,5 +1,27 @@
-<app-navbar></app-navbar>
-<app-drawer></app-drawer>
+<app-navbar *ngIf="!isFullScreen"></app-navbar>
+<app-drawer *ngIf="!isFullScreen"></app-drawer>
 <div [ngStyle]="{'margin-left':_themes.isLeftNavOpen ? '80px' : '260px','display':'flex','margin-top':'60px','border-bottom':'2px black solid','padding':'10px','padding-left':'0px'}">
-    
+</div>
+<div [ngStyle]="{'margin-left':_themes.isLeftNavOpen ? '80px' : '260px','display':'flex','border-bottom':'2px black solid','padding':'10px','padding-left':'0px','justify-content':'center'}">    
+    <div ngClass="player-container {{isFullScreen == true ? 'full-screen' : ''}}">
+        <video id="video">
+            <source src="http://videos.files.dodear.com/videos/2024/02/v2psx4tgkd8j/v2psx4tgkd8j-720p.mp4" type="video/mp4">
+        </video>
+        <div class="player-controls-body">
+            <div class="seekable" (mousedown)="onSeekMouseDown($event)" id="d">
+                <div class="seekable-progress" [style.width.%]="this.seekableDuration"></div>
+                <div class="seekable-thumb" [style.width.%]="seekablePercentage"></div>
+            </div>
+            <div style="display:flex;position: relative;">
+                <i class="{{this.isPlaying ? 'fa fa-pause' : 'fa fa-play'}} player-controls-common-color" style="font-size: 15px;" (click)="togglePlayPause()"></i>
+                <div class="player-controls-common-color" style="font-size: 12px;margin-left: 20px;">{{currentTime?? "00:00"}}</div>
+                <span class="player-controls-common-color" style="font-size: 12px;margin-left: 5px;">&#47;</span>
+                <div class="player-controls-common-color" style="font-size: 12px;margin-left: 5px;">{{duration?? "00:00"}}</div>
+            </div>
+            
+            <div style="display: flex;padding-right: 30px;">
+                <i class="{{this.isFullScreen ? 'fas fa-compress' : 'fas fa-expand'}} player-controls-common-color" style="font-size: 20px;" (click)="toggleFullScreen()"></i>
+            </div>
+        </div>
+    </div>
 </div>

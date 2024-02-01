@@ -1,0 +1,78 @@
+.player-container{
+    width: 60%;
+    height: 490px;
+    position: relative;
+    outline: 0;
+    overflow: hidden;
+}
+
+.full-screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.player-container video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: black;
+}
+
+.player-controls-body{
+    position: absolute;
+    bottom: 0;left: 0;
+    background-color: rgba(1, 1, 1, 0.36);
+    width: 100%;
+    display: flex;
+    height: 60px;
+    align-items: center;
+    padding-left: 30px;
+    justify-content: space-between;
+    overflow: hidden;
+    transition-delay: 2s;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+}
+
+.player-controls-body div i{
+    cursor: pointer;
+}
+
+.player-container:hover .player-controls-body{
+    transition: ease-out .1s;
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.seekable {
+    background-color: rgba(158, 157, 157, 0.2);
+    width: 100%;
+    position: inherit;
+    top:0;
+    left: 0;
+    cursor: pointer;
+  }
+  
+  .seekable-progress {
+    background-color:rgba(158, 157, 157, 0.4);
+    height:6px
+  }
+  
+  .seekable-thumb {
+    background-color: red;
+    height: 6px;
+    position: absolute;
+    left:0;top: 0
+  }
+
+  .player-controls-common-color{
+    color: aliceblue;
+  }
