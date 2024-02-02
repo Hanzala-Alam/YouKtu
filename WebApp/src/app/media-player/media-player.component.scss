@@ -73,6 +73,29 @@
     left:0;top: 0
   }
 
+  .seekable:hover {
+    background-color: rgb(67, 64, 64);
+  }
+
   .player-controls-common-color{
     color: aliceblue;
+  }
+
+  .seekable-button{
+    height: 100%;
+    width: 200px;
+    background-color: aliceblue;
+    position: absolute;
+    align-items: center;
+    opacity: 0;top:0;
+  }
+
+  .seekable-last{
+    left:0;
+    border-radius: 0px 100% 100% 0;
+  }
+
+  .seekable-next{
+    right:0;
+    border-radius: 100% 0 0 100%;
   }

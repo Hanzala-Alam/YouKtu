@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2,HostListener } from '@angular/core';
 import {ThemesService} from '../Theme/themes.service';
 import {ActivatedRoute} from '@angular/router';
-import { window } from 'rxjs';
+import { interval, timer, window } from 'rxjs';
 
 @Component({
   selector: 'app-media-player',
@@ -21,6 +21,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   seekableTime:number= 0;
   isSeeking: boolean = false;
   seekablePercentage: number = 0;
+  canplay: any = true;
 
   constructor(private themes:ThemesService, private route:ActivatedRoute, private el:ElementRef, private renderer:Renderer2){
     this._themes = themes;
@@ -31,6 +32,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     this.renderer.listen(this.videoElement, 'loadeddata', () => {
       // Video has loaded, perform initialization here
       this.duration = this.getFormattedDuration(this.videoElement.duration);
+      this.togglePlayPause();
       // You can add any additional initialization logic here
     });
 
@@ -51,7 +53,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
 
   togglePlayPause(): void {
     const videoElement = document.getElementById('video') as HTMLVideoElement;
-
+    
     if (videoElement.paused) {
       videoElement.play();
       this.isPlaying = true;
@@ -61,6 +63,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     }
   }
 
+  globalListenFunc: any;
   ngOnInit(): void {
     this.elem = document.documentElement;
     document.addEventListener('fullscreenchange', ()=>{
@@ -68,6 +71,45 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
         this.isFullScreen = false;
       }
     });
+
+    this.globalListenFunc = this.renderer.listen('document', 'keypress', e => {
+      if(e.keyCode === 32){
+        this.togglePlayPause();
+      }
+      else if(e.keyCode == 102){
+        this.toggleFullScreen();
+      }
+    });
+
+    this.globalListenFunc = this.renderer.listen('document', 'keydown', e => {
+      if(e.keyCode === 37){
+        this.Last10();
+      }
+
+      else if(e.keyCode == 39){
+        this.Next10();
+      }
+    });
+
+    const a = document.getElementById("video");
+    a?.addEventListener('mousedown',()=>{this.m()});
+    a?.addEventListener("click", ()=>{this.togglePlayPause();});
+  }
+
+  Last10(){
+    if(this.videoElement.currentTime > (this.videoElement.currentTime - 10)){
+      this.videoElement.currentTime = this.videoElement.currentTime-10;
+    }else{
+      this.videoElement.currentTime = 0;
+    }
+  }
+
+  Next10(){
+    if(this.videoElement.duration > (this.videoElement.currentTime + 10)){
+      this.videoElement.currentTime = this.videoElement.currentTime + 10;
+    }else{
+      this.videoElement.currentTime = this.videoElement.duration;
+    }
   }
 
   getFormattedDuration(duration:number): string {
@@ -131,7 +173,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
       const seekableStart = seekable.start(0); // Start time of the first seekable range
       const seekableEnd = seekable.end(0); // End time of the first seekable range
       const seekableDuration = seekableEnd - seekableStart;
-      this.seekableTime = (this.seekableTime + seekableDuration / 100) / 2;
+      this.seekableTime = (this.seekableTime + seekableDuration / 100) / 100;
       this.seekableDuration = this.seekableTime;
     } else {
       this.seekableTime = 0;
@@ -151,11 +193,22 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
 
   onSeekMouseDown(event: MouseEvent): void {
     const rect = (event.target as HTMLDivElement).getBoundingClientRect();
-    const d = document.getElementById('d') as HTMLDivElement;
+    const d = document.getElementById('seekable') as HTMLDivElement;
     const offsetX = (event.clientX - rect.left);
     const percentage = (offsetX / d.offsetWidth) * 100;
     this.seekablePercentage = percentage;
     const seekTime = (this.seekablePercentage / 100) * this.videoElement.duration;
     this.videoElement.currentTime = seekTime;
+  }
+
+  focus(){
+    console.log("focus");
+  }
+
+  m(){
+    setTimeout(() => {
+      this.canplay = false;
+      this.videoElement.playbackRate += 1;
+    }, 300);
   }
 }
