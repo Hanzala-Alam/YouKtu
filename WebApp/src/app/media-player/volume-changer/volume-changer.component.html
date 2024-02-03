@@ -1,0 +1,7 @@
+<div class="volume-container">
+    <span class="mute-button {{_playerService.volumeIcon}}" id="volume-button"></span>
+    <div class="volume-slider" (mousedown)="adjustVolume($event)">
+        <div class="volume-knob" [style.left]="volumeLevel + '%'"></div>
+    </div>
+</div>
+  

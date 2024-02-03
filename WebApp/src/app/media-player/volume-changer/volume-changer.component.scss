@@ -1,0 +1,43 @@
+/* volume-changer.component.css */
+.volume-container {
+    position: relative;
+    width: 100px;
+    height: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    overflow: hidden;
+    transition: linear 0.2s;
+    padding-left: 5px;
+  }
+
+.volume-container:hover{
+    width: 100px;
+}
+  
+  .volume-slider {
+    width: 100px;
+    height: 5px;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin: 0 10px;
+    position: relative;
+  }
+  
+  .volume-knob {
+    width: 13px;
+    height: 13px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .mute-button {
+    cursor: pointer;
+    color: aliceblue;
+    width: 40px;display: block;
+  }
+  

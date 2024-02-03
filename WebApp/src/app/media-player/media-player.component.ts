@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2,HostListener } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import {ThemesService} from '../Theme/themes.service';
 import {ActivatedRoute} from '@angular/router';
-import { interval, timer, window } from 'rxjs';
-
+import {PlayerServicesService} from '../Services/player-services.service';
 @Component({
   selector: 'app-media-player',
   templateUrl: './media-player.component.html',
@@ -10,6 +9,7 @@ import { interval, timer, window } from 'rxjs';
 })
 export class MediaPlayerComponent implements OnInit, AfterViewInit {
   _themes: ThemesService;
+  _playerService: PlayerServicesService
   isPlaying: boolean = false;
   videoElement: HTMLVideoElement;
   isFullScreen: boolean = false;
@@ -23,9 +23,10 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   seekablePercentage: number = 0;
   canplay: any = true;
 
-  constructor(private themes:ThemesService, private route:ActivatedRoute, private el:ElementRef, private renderer:Renderer2){
+  constructor(private themes:ThemesService, private playerService:PlayerServicesService, private route:ActivatedRoute, private el:ElementRef, private renderer:Renderer2){
     this._themes = themes;
     this.videoElement = this.el.nativeElement.querySelector('#video') as HTMLVideoElement;
+    this._playerService = playerService;
   }
   ngAfterViewInit(): void {
     this.videoElement = this.el.nativeElement.querySelector('#video') as HTMLVideoElement;
@@ -33,6 +34,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
       // Video has loaded, perform initialization here
       this.duration = this.getFormattedDuration(this.videoElement.duration);
       this.togglePlayPause();
+      this.videoElement.volume = this._playerService.volume;
       // You can add any additional initialization logic here
     });
 
@@ -92,7 +94,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     });
 
     const a = document.getElementById("video");
-    a?.addEventListener('mousedown',()=>{this.m()});
+    // a?.addEventListener('mousedown',()=>{this.m()});
     a?.addEventListener("click", ()=>{this.togglePlayPause();});
   }
 
@@ -181,16 +183,6 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // getDivWidth(event: MouseEvent): void {
-  //   const divWidth = (event.target as HTMLDivElement);
-  //   console.log('Div Width:', divWidth);
-  // }
-
-  // mouseover(event: MouseEvent):void{
-  //   const divWidth = (event.target as HTMLDivElement);
-  //   console.log("ss");
-  // }
-
   onSeekMouseDown(event: MouseEvent): void {
     const rect = (event.target as HTMLDivElement).getBoundingClientRect();
     const d = document.getElementById('seekable') as HTMLDivElement;
@@ -201,14 +193,15 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     this.videoElement.currentTime = seekTime;
   }
 
-  focus(){
-    console.log("focus");
-  }
+  // m(){
+  //   setTimeout(() => {
+  //     this.canplay = false;
+  //     this.videoElement.playbackRate += 1;
+  //   }, 300);
+  // }
 
-  m(){
-    setTimeout(() => {
-      this.canplay = false;
-      this.videoElement.playbackRate += 1;
-    }, 300);
+  adjustVolume(volume:number):void{
+    if(!this.canplay){return;}
+    this.videoElement.volume = volume;
   }
 }

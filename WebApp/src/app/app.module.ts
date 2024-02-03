@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { MovieCardComponent } from './cards/movie-card/movie-card.component';
 import { PreviewComponent } from './preview/preview.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
+import { VolumeChangerComponent } from './media-player/volume-changer/volume-changer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MediaPlayerComponent } from './media-player/media-player.component';
     HomeComponent,
     MovieCardComponent,
     PreviewComponent,
-    MediaPlayerComponent
+    MediaPlayerComponent,
+    VolumeChangerComponent
   ],
   imports: [
     BrowserModule,
