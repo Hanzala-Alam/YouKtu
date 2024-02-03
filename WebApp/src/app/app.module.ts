@@ -10,6 +10,7 @@ import { MovieCardComponent } from './cards/movie-card/movie-card.component';
 import { PreviewComponent } from './preview/preview.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
 import { VolumeChangerComponent } from './media-player/volume-changer/volume-changer.component';
+import { LongPressDirective } from './long-press.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { VolumeChangerComponent } from './media-player/volume-changer/volume-cha
     MovieCardComponent,
     PreviewComponent,
     MediaPlayerComponent,
-    VolumeChangerComponent
+    VolumeChangerComponent,
+    LongPressDirective
   ],
   imports: [
     BrowserModule,

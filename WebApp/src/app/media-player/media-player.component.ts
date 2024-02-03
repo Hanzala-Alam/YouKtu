@@ -21,7 +21,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   seekableTime:number= 0;
   isSeeking: boolean = false;
   seekablePercentage: number = 0;
-  canplay: any = true;
+  canplay: boolean = false;
 
   constructor(private themes:ThemesService, private playerService:PlayerServicesService, private route:ActivatedRoute, private el:ElementRef, private renderer:Renderer2){
     this._themes = themes;
@@ -31,6 +31,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.videoElement = this.el.nativeElement.querySelector('#video') as HTMLVideoElement;
     this.renderer.listen(this.videoElement, 'loadeddata', () => {
+      this.canplay = true;
       // Video has loaded, perform initialization here
       this.duration = this.getFormattedDuration(this.videoElement.duration);
       this.togglePlayPause();
@@ -54,6 +55,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   }
 
   togglePlayPause(): void {
+    if(!this.canplay){return;}
     const videoElement = document.getElementById('video') as HTMLVideoElement;
     
     if (videoElement.paused) {
@@ -93,12 +95,17 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
       }
     });
 
-    const a = document.getElementById("video");
-    // a?.addEventListener('mousedown',()=>{this.m()});
-    a?.addEventListener("click", ()=>{this.togglePlayPause();});
+    const video = document.getElementById("video");
+    video?.addEventListener('mouseup',()=>{this.setPlaybackNormal()});
+    video?.addEventListener("click", ()=>{this.togglePlayPause();});
+    video?.addEventListener("dblclick",()=>this.toggleFullScreen());
+    video?.addEventListener('contextmenu', (event) => {
+      event.preventDefault(); // Prevent the default context menu
+    });
   }
 
   Last10(){
+    if(!this.canplay){return;}
     if(this.videoElement.currentTime > (this.videoElement.currentTime - 10)){
       this.videoElement.currentTime = this.videoElement.currentTime-10;
     }else{
@@ -107,6 +114,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   }
 
   Next10(){
+    if(!this.canplay){return;}
     if(this.videoElement.duration > (this.videoElement.currentTime + 10)){
       this.videoElement.currentTime = this.videoElement.currentTime + 10;
     }else{
@@ -134,6 +142,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   }
 
   toggleFullScreen(): void {
+    if(!this.canplay){return;}
     if (!this.isFullScreen) {
       // this.videoElement.requestFullscreen();
       this.elem.requestFullscreen();
@@ -169,6 +178,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   }
 
   getSeekableDuration(): void {
+    if(!this.canplay){return;}
     // Get the seekable ranges of the video
     const seekable = this.videoElement.seekable;
     if (seekable && seekable.length > 0) {
@@ -184,6 +194,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   }
 
   onSeekMouseDown(event: MouseEvent): void {
+    if(!this.canplay){return;}
     const rect = (event.target as HTMLDivElement).getBoundingClientRect();
     const d = document.getElementById('seekable') as HTMLDivElement;
     const offsetX = (event.clientX - rect.left);
@@ -203,5 +214,17 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   adjustVolume(volume:number):void{
     if(!this.canplay){return;}
     this.videoElement.volume = volume;
+  }
+
+  setPlaybackRate2x():void{
+    this.canplay = false;
+    this.videoElement.playbackRate = 2;
+  }
+
+  setPlaybackNormal():void{
+    this.videoElement.playbackRate = 1;
+    setTimeout(()=>{
+      this.canplay = true;
+    },10);
   }
 }
