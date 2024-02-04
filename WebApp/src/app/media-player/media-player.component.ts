@@ -204,13 +204,6 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     this.videoElement.currentTime = seekTime;
   }
 
-  // m(){
-  //   setTimeout(() => {
-  //     this.canplay = false;
-  //     this.videoElement.playbackRate += 1;
-  //   }, 300);
-  // }
-
   adjustVolume(volume:number):void{
     if(!this.canplay){return;}
     this.videoElement.volume = volume;
