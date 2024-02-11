@@ -11,6 +11,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
 import { VolumeChangerComponent } from './media-player/volume-changer/volume-changer.component';
 import { LongPressDirective } from './long-press.directive';
+import { PlayerNotificationComponent } from './media-player/player-notification/player-notification.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LongPressDirective } from './long-press.directive';
     PreviewComponent,
     MediaPlayerComponent,
     VolumeChangerComponent,
-    LongPressDirective
+    LongPressDirective,
+    PlayerNotificationComponent
   ],
   imports: [
     BrowserModule,

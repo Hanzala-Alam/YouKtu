@@ -1,0 +1,21 @@
+<div class="playback2x-body" [style.display]="_playerService.playback2xBody">
+    <span class="playback2x-content">2x<span class="fa fa-forward"></span></span>        
+</div>
+
+<div class="playpause-container" [style.display]="_playerService.playPauseContainer">
+    <div class="playpause-content">
+        <i class="{{this._playerService.playing ? 'fa fa-pause' : 'fa fa-play'}}"></i>
+    </div>
+</div>
+
+<div class="skip-backword-container" [style.display]="_playerService.skipBackwardContainer">
+    <div class="skip-backword-content">
+        <span><i class="fa fa-backward"></i>&nbsp;&nbsp;10</span>
+    </div>
+</div>
+
+<div class="skip-forward-container" [style.display]="_playerService.skipForwardContainer">
+    <div class="skip-forward-content">
+        <span>10 &nbsp;<i class="fa fa-forward"></i></span>
+    </div>
+</div>

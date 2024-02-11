@@ -10,7 +10,6 @@ import {PlayerServicesService} from '../Services/player-services.service';
 export class MediaPlayerComponent implements OnInit, AfterViewInit {
   _themes: ThemesService;
   _playerService: PlayerServicesService
-  isPlaying: boolean = false;
   videoElement: HTMLVideoElement;
   isFullScreen: boolean = false;
   duration?: string ;
@@ -60,11 +59,13 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     
     if (videoElement.paused) {
       videoElement.play();
-      this.isPlaying = true;
+      this._playerService.playing = true;
     } else {
       videoElement.pause();
-      this.isPlaying = false;
+      this._playerService.playing = false;
     }
+
+    this._playerService.playPauseContainerAction();
   }
 
   globalListenFunc: any;
@@ -111,6 +112,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     }else{
       this.videoElement.currentTime = 0;
     }
+    this._playerService.skipBackwardContainerAction();
   }
 
   Next10(){
@@ -120,6 +122,7 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
     }else{
       this.videoElement.currentTime = this.videoElement.duration;
     }
+    this._playerService.skipForwardContainerAction();
   }
 
   getFormattedDuration(duration:number): string {
@@ -212,12 +215,14 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   setPlaybackRate2x():void{
     this.canplay = false;
     this.videoElement.playbackRate = 2;
+    this._playerService.playback2xBody = "flex";
   }
 
   setPlaybackNormal():void{
     this.videoElement.playbackRate = 1;
     setTimeout(()=>{
       this.canplay = true;
+      this._playerService.playback2xBodyAction();
     },10);
   }
 }

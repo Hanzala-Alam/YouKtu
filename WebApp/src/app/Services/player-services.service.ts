@@ -1,3 +1,4 @@
+import { animate, animation, transition } from '@angular/animations';
 import { Injectable, OnInit} from '@angular/core';
 
 @Injectable({
@@ -7,6 +8,11 @@ import { Injectable, OnInit} from '@angular/core';
 export class PlayerServicesService{
   volume:number = 1;
   volumeIcon:string = "";
+  playing:boolean = false;
+  playPauseContainer:string = "flex";
+  playback2xBody:string = "none";
+  skipBackwardContainer: string = "none";
+  skipForwardContainer: string = "none";
   constructor(){
     this.getVolumeSetting();
   }
@@ -41,5 +47,30 @@ export class PlayerServicesService{
     }if(this.volume > 0.5){
       this.volumeIcon = "fas fa-volume-up";
     }
+  }
+
+  playPauseContainerAction():void{
+    this.playPauseContainer = "flex";
+    setTimeout(()=>{
+      this.playPauseContainer = "none";
+    },800);
+  }
+
+  playback2xBodyAction():void{
+    this.playback2xBody = "none";
+  }
+
+  skipBackwardContainerAction():void{
+    this.skipBackwardContainer = "flex";
+    setTimeout(()=>{
+      this.skipBackwardContainer = "none";
+    },800);
+  }
+
+  skipForwardContainerAction():void{
+    this.skipForwardContainer = "flex";
+    setTimeout(()=>{
+      this.skipForwardContainer = "none";
+    },800);
   }
 }
