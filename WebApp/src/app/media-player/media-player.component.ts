@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, Renderer2 } from '@angula
 import {ThemesService} from '../Theme/themes.service';
 import {ActivatedRoute} from '@angular/router';
 import {PlayerServicesService} from '../Services/player-services.service';
+import {Movie} from '../Models/movie';
+import {MovieServiceService} from '../Services/movie-service.service';
 @Component({
   selector: 'app-media-player',
   templateUrl: './media-player.component.html',
@@ -21,36 +23,48 @@ export class MediaPlayerComponent implements OnInit, AfterViewInit {
   isSeeking: boolean = false;
   seekablePercentage: number = 0;
   canplay: boolean = false;
+  movie:Movie | undefined;
 
-  constructor(private themes:ThemesService, private playerService:PlayerServicesService, private route:ActivatedRoute, private el:ElementRef, private renderer:Renderer2){
+  constructor(private themes:ThemesService, private playerService:PlayerServicesService, private route:ActivatedRoute, private el:ElementRef, private renderer:Renderer2,private movieService:MovieServiceService){
     this._themes = themes;
     this.videoElement = this.el.nativeElement.querySelector('#video') as HTMLVideoElement;
+    this.route.paramMap.subscribe((params:any) => {
+      const value = params.get('id');
+      // this.movie = JSON.parse(decodeURIComponent(value));
+      movieService.getMovieById(value).subscribe(data=>{this.movie = data;this.ngAfterViewInit();});
+    });
     this._playerService = playerService;
   }
   ngAfterViewInit(): void {
     this.videoElement = this.el.nativeElement.querySelector('#video') as HTMLVideoElement;
-    this.renderer.listen(this.videoElement, 'loadeddata', () => {
+    this.videoElement.addEventListener("waiting", ()=>{
+      this.playerService.loading = true;
+      this.canplay = false;
+    });
+    this.videoElement.addEventListener("playing", ()=>{
+      this.playerService.loading = false;
       this.canplay = true;
-      // Video has loaded, perform initialization here
-      this.duration = this.getFormattedDuration(this.videoElement.duration);
-      this.togglePlayPause();
-      this.videoElement.volume = this._playerService.volume;
-      // You can add any additional initialization logic here
     });
+    if(this.movie != undefined && this.movie != null){
+      this.renderer.listen(this.videoElement, 'loadeddata', () => {
+        this.canplay = true;
+        // Video has loaded, perform initialization here
+        this.duration = this.getFormattedDuration(this.videoElement.duration);
+        this.togglePlayPause();
+        this.videoElement.volume = this._playerService.volume;
+        // You can add any additional initialization logic here
+      });
 
-    // Listen for the timeupdate event
-    this.renderer.listen(this.videoElement, 'timeupdate', () => {
-      this.currentTime = this.getFormattedDuration(this.videoElement.currentTime);
-      this.seekablePercentage = (this.videoElement.currentTime * 100 / this.videoElement.duration);
-    });
+      // Listen for the timeupdate event
+      this.renderer.listen(this.videoElement, 'timeupdate', () => {
+        this.currentTime = this.getFormattedDuration(this.videoElement.currentTime);
+        this.seekablePercentage = (this.videoElement.currentTime * 100 / this.videoElement.duration);
+      });
 
-    // this.renderer.listen(this.videoElement,'loadedmetadata',()=>{
-    //   this.getSeekableDuration();
-    // });
-
-    this.renderer.listen(this.videoElement,'progress',()=>{
-      this.getSeekableDuration();
-    });
+      this.renderer.listen(this.videoElement,'progress',()=>{
+        this.getSeekableDuration();
+      });
+    }
   }
 
   togglePlayPause(): void {

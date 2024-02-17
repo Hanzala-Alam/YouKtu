@@ -6,7 +6,7 @@
     <div ngClass="player-container {{isFullScreen == true ? 'full-screen' : ''}}" >
         <app-player-notification></app-player-notification>
         <video id="video" style="cursor: pointer;" appLongPress (longPress)="setPlaybackRate2x()">
-            <source src="http://videos.files.dodear.com/videos/2024/02/v2psx4tgkd8j/v2psx4tgkd8j-720p.mp4" type="video/mp4">
+            <source [src]="movie?.moviePath" type="video/mp4">
         </video>
         <div class="player-controls-body">
             <div class="seekable" (mousedown)="onSeekMouseDown($event)" id="seekable">
@@ -25,6 +25,7 @@
                 <i class="{{this.isFullScreen ? 'fas fa-compress' : 'fas fa-expand'}} player-controls-common-color" style="font-size: 20px;" (click)="toggleFullScreen()"></i>
             </div>
         </div>
+        <i class="fa fa-spinner fa-spin" style="color: white;font-size: 50px;" *ngIf="_playerService.loading"></i>
         <div class="seekable-button seekable-last" (dblclick)="Last10()"></div>
         <div class="seekable-button seekable-next" (dblclick)="Next10()"></div>
     </div>

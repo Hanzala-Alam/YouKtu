@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:"", component: HomeComponent},
   {path:"Home", component: HomeComponent},
   {path:"Preview/:id", component: PreviewComponent},
-  {path:"MediaPlayer/:id?", component: MediaPlayerComponent},
+  {path:"MediaPlayer/:id", component: MediaPlayerComponent},
 ];
 
 @NgModule({

@@ -9,10 +9,11 @@ export class PlayerServicesService{
   volume:number = 1;
   volumeIcon:string = "";
   playing:boolean = false;
-  playPauseContainer:string = "flex";
+  playPauseContainer:string = "none";
   playback2xBody:string = "none";
   skipBackwardContainer: string = "none";
   skipForwardContainer: string = "none";
+  loading:boolean = true;
   constructor(){
     this.getVolumeSetting();
   }

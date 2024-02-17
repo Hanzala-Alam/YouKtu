@@ -1,6 +1,6 @@
 .playback2x-body{
-    width: 100%;
     position: absolute;
+    width: 100%;
     top:0;left: 0;
     justify-content: center;
     margin-top: 20px;
@@ -22,7 +22,6 @@
 
 .playpause-container{
     position: relative;
-    height: 100%;width: 100px;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -56,7 +55,6 @@
     justify-content: center;
     z-index: 100;
     left: 0;top: 0;
-    display: none;
 }
 
 .skip-backword-content{

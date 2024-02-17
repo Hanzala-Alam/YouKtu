@@ -12,6 +12,9 @@ import { MediaPlayerComponent } from './media-player/media-player.component';
 import { VolumeChangerComponent } from './media-player/volume-changer/volume-changer.component';
 import { LongPressDirective } from './long-press.directive';
 import { PlayerNotificationComponent } from './media-player/player-notification/player-notification.component';
+import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,11 +27,14 @@ import { PlayerNotificationComponent } from './media-player/player-notification/
     MediaPlayerComponent,
     VolumeChangerComponent,
     LongPressDirective,
-    PlayerNotificationComponent
+    PlayerNotificationComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

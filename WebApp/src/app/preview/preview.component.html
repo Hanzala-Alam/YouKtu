@@ -3,16 +3,16 @@
 <app-drawer></app-drawer>
 
 <div [ngStyle]="{'margin-left':_themes.isLeftNavOpen ? '80px' : '260px','display':'flex','margin-top':'60px','border-bottom':'2px black solid','padding':'10px','padding-left':'0px'}">
-    <strong style="font-size: 20px;"><span>Pushpa - Chapter 2 (Rules)</span></strong>
+    <strong style="font-size: 20px;"><span>{{movie?.name}}</span></strong>
 </div>
 <div [ngStyle]="{'margin-left':_themes.isLeftNavOpen ? '75px' : '260px','display':'flex','margin-top':'10px'}">
     <div class="poster-body">
         <div class="play-body">
-            <div class="play-button-body">
+            <div class="play-button-body" (click)="navigateToMediaPlayer(movie)">
                 <i class="fa fa-play" style="font-size: 40px;color: wheat;"></i>
             </div>
         </div>
-        <img src="https://m.media-amazon.com/images/M/MV5BNGZlNTFlOWMtMzUwNC00ZDdhLTk0MWUtOGZjYzFlOTBmNDdhXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg" style="width: 100%">
+        <img src="{{movie?.posterPath}}" style="width: 100%">
     </div>
     <div style="width: 100%;padding: 5px;">
         <div style="width: 100%;background-color: rgba(79, 206, 126, 0.852);">
@@ -21,12 +21,12 @@
                     <tr>
                         <th style="font-size: 13px;">Releas Date</th>
                         <th style="font-size: 13px;">:</th>
-                        <th style="font-size: 13px;">01/23/2024</th>
+                        <th style="font-size: 13px;">{{movie?.releaseDate}}</th>
                     </tr>
                     <tr>
                         <th style="font-size: 13px;">Posted Date</th>
                         <th style="font-size: 13px;">:</th>
-                        <th style="font-size: 13px;">01/23/2024</th>
+                        <th style="font-size: 13px;">{{movie?.postedDate}}</th>
                     </tr>
                 </thead>
             </table>
