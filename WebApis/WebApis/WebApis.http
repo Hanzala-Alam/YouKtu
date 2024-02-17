@@ -1,0 +1,11 @@
+@WebApis_HostAddress = http://localhost:5190
+
+GET {{WebApis_HostAddress}}/movies/
+Accept: application/json
+
+###
+
+GET {{WebApis_HostAddress}}/movies/1
+Accept: application/json
+
+###
