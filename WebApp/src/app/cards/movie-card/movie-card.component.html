@@ -1,5 +1,5 @@
 
-<div class="movie-card" *ngFor="let movie of movieList">
+<div class="movie-card" *ngFor="let movie of movieList" [ngStyle]="{'width': _themes.isLeftNavOpen ? '275px' : '240px'}">
     <img src="{{movie.posterPath}}" alt="Movie Poster">
     <div class="movie-card-content">
         <div class="movie-title" (click)="navigateToPreview(movie.id)">{{movie.name}}</div>

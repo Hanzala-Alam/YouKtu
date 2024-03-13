@@ -26,6 +26,6 @@ export class PreviewComponent implements OnInit {
 
   navigateToMediaPlayer(movie:Movie){
     // const serializeMovie = encodeURIComponent(JSON.stringify(movie));
-    this.router.navigate(["MediaPlayer",movie.id]);
+    this.router.navigate(["MediaPlayer",movie.moviePath]);
   }
 }

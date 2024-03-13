@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import {ThemesService} from '../../Theme/themes.service';
 import {MovieServiceService} from '../../Services/movie-service.service';
 import {Movie} from '../../Models/movie';
@@ -12,23 +12,18 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent implements OnInit {
+export class MovieCardComponent implements OnInit,AfterViewInit {
   _themes:ThemesService;
   movieList:Movie[] = [];
-  constructor(private themes:ThemesService, private movieService:MovieServiceService, private router:Router,public dialog: MatDialog){
+  constructor(private themes:ThemesService, private movieService:MovieServiceService, private router:Router,public dialog: MatDialog, private renderer:Renderer2){
     this._themes = themes;
-    this.openModal();
+    this.movieService._movieList$.subscribe(data=> {this.movieList = data});
+  }
+  ngAfterViewInit(): void {
+    
   }
   
   ngOnInit(): void {
-    
-    this.movieService.getMovieList().subscribe(data => {
-      this.movieList = data;
-      if(this.movieList.length > 0){
-        this.closeModal();        
-      }
-    });
-    
   }
 
   navigateToPreview(id:number){
